@@ -12,20 +12,21 @@ from datetime import date
 
 } """
 
-
+#CREA UN NUEVO CLIENTE
 def crear_cliente():
     cliente=[0,"","","","",0,0]
     return cliente
 
 def cargar_cliente(cliente,nombre,apellido,nro,tipo,precio,fecha=date.today(),descuento=0):
-    cliente[0]=nombre
-    cliente[1]=apellido
-    cliente[2]=nro
-    cliente[3]=tipo
-    cliente[4]=precio
-    cliente[5]=fecha
-    cliente[6]=descuento
+    cliente[0]=nombre #NOMBRE DEL CLIENTE
+    cliente[1]=apellido #APELLIDO DEL CLIENTE
+    cliente[2]=nro #NUMERO DEL CLIENTE
+    cliente[3]=tipo #TIPO DEL SERVICIO QUE POSEE
+    cliente[4]=precio #PRECIO DEL SERVICIO QUE POSEE
+    cliente[5]=fecha #FECHA DE ALTA, SE SETEA LA FECHA EN LA QUE SE DA DE ALTA EL CLIENTE.
+    cliente[6]=descuento #VARIABLE QUE ME PERMITE SABER SI EL CLIENTE TIENE EL DESCUENTO APLICADO O NO
 
+#VER CAMPOS  DEL CLIENTE
 def ver_nombre(cliente):
     return cliente[0]
 
@@ -47,6 +48,8 @@ def ver_fecha_alta(cliente):
 def ver_descuento(cliente):
     return cliente[6]
 
+
+#MODIFICAR CAMPOS DEL CLIENTE.
 def modificar_nombre(cliente,nombre):
     cliente[0]=nombre
 

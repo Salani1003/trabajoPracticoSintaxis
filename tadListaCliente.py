@@ -1,70 +1,45 @@
 #ESTRUCTURA INTERNA DE LA LISTA DE CLIENTES
 
 """ 
-    LISTA DE CLIENTES 
- """
+    LISTA DE CLIENTES : [cliente1,cliente2] 
+"""
+
+
 from datetime import date
 from http import client
 from tadClliente import*
 
-
+#CREAR LA NUEVA LISTA VACIA
 def crear_lista_cliente():
     lista_cliente=[]
     return lista_cliente
 
+#AGREGA UN NUEVO CLIENTE A LA LISTA
 def agregar_cliente(lista,cliente):
     lista.append(cliente)
 
+#RETORNA EL TAMAÑO DE LA LISTA
 def tamanio(lista):
     return len(lista)
 
+#RECIBE UNA LISTA Y UN INDICE, DEVUELVE EL CLIENTE ALOJADO EN ESE INDICE 
 def recuperar_cliente(lista,index):
     return lista[index]
 
+#RECIBE UNA LISTA Y UN CLIENTE, ELIMINA ESE CLIENTE DE LA LISTA  
 def eliminar_cliente(lista,cliente):
     lista.remove(cliente)
 
-def listar_todos_clientes(lista):
-    if(tamanio(lista)!=0):
-        for i in lista:
-            print("------------------------")
-            print("NUMERO DE CLIENTE: ",ver_numero_cliente(i))
-            print("NOMBRE: ",ver_nombre(i))
-            print("APELLIDO: ",ver_apellido(i))
-            print("FECHA DE ALTA: ",ver_fecha_alta(i))
-            print("TIPO DE SERVICIO: ",ver_tipo(i))
-            print("PRECIO DEL SERVICIO: ",ver_precio(i))
-            print("")
-    else:
-        print("LA LISTA ESTA VACIA") 
-
-def eliminar_por_tipo(lista):
-    if(tamanio(lista)!=0):
-        tam=tamanio(lista)
-        cantEli=0
-        tipo=input("INGRESE EL TIPO DE SERVICIO: ")
-        i=0
-
-        while i < tam:
-            client=recuperar_cliente(lista,i)
-            if(ver_tipo(client)==tipo):
-                eliminar_cliente(lista,client)
-                tam -=1
-                cantEli+=1
-            else:
-                i = i+1
-        print("SE ELIMINARON",cantEli,"CLIENTES DE TIPO",tipo)  
-        
-    else:
-        print("LA LISTA ESTA VACIA") 
-
+#RETORNA LA DIFERENCIA EN MESES ENTRE DOS FECHAS.
 def diferencia_de_meses(f1,f2):
     return (f1.year - f2.year) * 12 + f1.month - f2.month
 
+#RETORNA EL MONTON APLICANDOLE UN 10% DE DESCUENTO
 def calcular_descuento(cliente):
     monto=ver_precio(cliente)-ver_precio(cliente)*0.10
     return monto
 
+#SI EL CLIENTE TIENE MAS DE TRES AÑOS DE ANTIGUEDAD Y TODAVIA NO SE LE APLICARON DESCUENTOS, LOS APLICA.
 def descontar(lista):
     if(tamanio(lista)!=0):
         tam=tamanio(lista)
@@ -83,10 +58,10 @@ def descontar(lista):
     else:
         print("LA LISTA ESTA VACIA")
 
+#ME DEVUELVE LOS CLIENTES QUE TIENEN DESCUENTO APLICADOS. 
 def listar_clientes_con_descuento_aplicado(lista):
     if(tamanio(lista)!=0):
         cantCl=0
-        print("entro al if")
         for i in range(0,tamanio(lista)):
             client=recuperar_cliente(lista,i)
             if(ver_descuento(client)==1):

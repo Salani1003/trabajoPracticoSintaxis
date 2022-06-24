@@ -72,29 +72,61 @@ def modificar_cliente(lista):
     
 def eliminar_cliente_por_numero(lista):
     print("OPCION ELEGIDA -->",opcion ,"\n")
-    tam=tamanio(lista)
+    cantEli=0
     if(tamanio(lista)!=0):
         numero=int(input("INGRESE EL NUMERO DEL CLIENTE: "))
-        for i in range(0,tam):
+        tam=tamanio(lista)
+        i=0
+        while i < tam:
             client=recuperar_cliente(lista,i)
             if(ver_numero_cliente(client)==numero):
-                clearConsole()
+                
                 eliminar_cliente(lista,client)
-                print("CLIENTE ELIMINADO CON EXITO")
-            else:
-                clearConsole()
-                print("NO EXISTE UN CLIENTE CON ESE NUMERO")
+                tam-=1
+                cantEli+=1
+            i+=1
+        if(cantEli>0):
+            print("CLIENTE NUMERO",numero,"ELIMINADO CON EXITO")
     else:
         print("LA LISTA ESTA VACIA") 
 
 
 def listar_clientes(lista):
     print("OPCION ELEGIDA -->",opcion ,"\n")
-    listar_todos_clientes(lista)
+    if(tamanio(lista)!=0):
+        for i in lista:
+            print("------------------------")
+            print("NUMERO DE CLIENTE: ",ver_numero_cliente(i))
+            print("NOMBRE: ",ver_nombre(i))
+            print("APELLIDO: ",ver_apellido(i))
+            print("FECHA DE ALTA: ",ver_fecha_alta(i))
+            print("TIPO DE SERVICIO: ",ver_tipo(i))
+            print("PRECIO DEL SERVICIO: ",ver_precio(i))
+            print("")
+    else:
+        print("LA LISTA ESTA VACIA") 
 
 def eliminar_cliente_por_tipo(lista):
     print("OPCION ELEGIDA -->",opcion ,"\n")
-    eliminar_por_tipo(lista)
+    if(tamanio(lista)!=0):
+        tam=tamanio(lista)
+        cantEli=0
+        tipo=input("INGRESE EL TIPO DE SERVICIO: ")
+        i=0
+
+        while i < tam:
+            client=recuperar_cliente(lista,i)
+            if(ver_tipo(client)==tipo):
+                eliminar_cliente(lista,client)
+                tam -=1
+                cantEli+=1
+            else:
+                i = i+1
+        print("SE ELIMINARON",cantEli,"CLIENTES DE TIPO",tipo)  
+        
+    else:
+        print("LA LISTA ESTA VACIA") 
+
     
 def realizar_descuento(lista):
     print("OPCION ELEGIDA -->",opcion ,"\n")
@@ -112,10 +144,17 @@ print(" MENU \n")
 client=crear_cliente()
 lista=crear_lista_cliente()
 
+#DEFINIMOS UN CLIENTE DE PRUEBA Y LO CARGAMOS EN LA LISTA
+#ASI TENEMOS ALGUN DATO CON FECHA VIEJA PARA MOSTRAR COMO SE HACE EL DESCUENTO.
+
 cliente1=crear_cliente()
 fecha=date(2017, 12,25)
 cargar_cliente(cliente1,"pablo","salani",15,"plus",1500,fecha)
 agregar_cliente(lista,cliente1)
+
+#EL SISTEMA NO PERMITE LA MODIFICACION DE LA FECHA DE ALTA Y NUMERO DE CLIENTE. 
+#ESTO SE DEBE A QUE CONSIDERAMOS QUE LA FECHA DE ALTA ES UNICA, Y SE DEBE TOMAR LA FECHA EN LA QUE EL CLIENTE FUE CREADO
+#ADEMAS TOMAMOS EL NUMERO DEL CLIENTE COMO UN IDENTIFICADOR UNICO,(EN UNA BASE DE DATOS ES UN ID AUTOINCREMENTAL) POR LO QUE NO VEO CORRECTO CAMBIARLO UNA VEZ QUE ESTA SETEADO.
 
 res='si'
 
@@ -148,19 +187,19 @@ while(res=='si'):
     elif(opcion==2): #MODIFICO UN CLIENTE POR NRO DE CLIENTE
         clearConsole()
         modificar_cliente(lista)
-    elif(opcion==3):
+    elif(opcion==3): #ELIMINO EL CLIENTE QUE COINCIDA CON EL NUMERO DE CLIENTE INGRESADO
         clearConsole()
         eliminar_cliente_por_numero(lista)
-    elif(opcion==4):
+    elif(opcion==4): #LISTO TODOS LOS CLIENTES
         clearConsole()
         listar_clientes(lista)
-    elif(opcion==5):
+    elif(opcion==5): #ELIMINO LOS CLIENTES QUE COINCIDAN CON EL TIPO INGRESADO.
         clearConsole()
         eliminar_cliente_por_tipo(lista)
-    elif(opcion==6):
+    elif(opcion==6): #REALIZO EL DESCUENTO A LOS CLIENTES QUE CORRESPONDE
         clearConsole()
         realizar_descuento(lista)
-    elif(opcion==7):
+    elif(opcion==7): #LISTAR TODOS LOS CLIENTES QUE TIENEN APLICADOS DESCUENTOS. 
         clearConsole()
         listar_clientes_con_descuento(lista)
 
