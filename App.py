@@ -41,6 +41,7 @@ def modificar_cliente(lista):
                     print(" MODIFICAR APELLIDO            (2) ")
                     print(" MODIFICAR TIPO DE SERVICIO    (3) ")
                     print(" MODIFICAR PRECIO DEL SERVICIO (4) ")
+                    print(" MODIFICAR FECHA ALTA SERVICIO (5) ")
                     dato=int(input("INGRESE OPCION -->  "))
 
                     if(dato==1):
@@ -56,13 +57,22 @@ def modificar_cliente(lista):
                         modificar_tipo(client,nuevo_tipo)
                         print("<===== TIPO DE SERVICIO MODIFICADO=====>")
                     elif(dato==4):
-                        nuevo_precio=input("INGRESE NUEVO PRECIO PARA EL SERVICIO")
+                        nuevo_precio=input("INGRESE NUEVO PRECIO PARA EL SERVICIO:")
                         modificar_precio(client,nuevo_precio)
                         print("<===== PRECIO DE SERVICIO MODIFICADO=====>")
+                    elif(dato==5):
+                        print("<===== INGRESE LOS DATOS DE MANERA NUMERICA=====>")
+                        nuevo_anio=int(input("INGRESE NUEVO AÑO PARA FECHA DE ALTA: "))
+                        nuevo_mes=int(input("INGRESE NUEVO MES PARA FECHA DE ALTA: "))
+                        nuevo_dia=int(input("INGRESE NUEVO DIA PARA FECHA DE ALTA: "))
+                        fecha=date(nuevo_anio,nuevo_mes,nuevo_dia)
+                        modificar_fecha(client,fecha)
+                        print("<===== FECHA DE ALTA MODIFICADO=====>")
+
                     else:
                         print("OPCION INGRESADA NO ES VALIDA")
 
-                    rta=input("¿DESEA SEGUIR MODIFICANDO ESTE CLIENTE?")
+                    rta=input("¿DESEA SEGUIR MODIFICANDO ESTE CLIENTE si/no?")
             else:
                 clearConsole()
                 print("NO EXISTE UN CLIENTE CON ESE NUMERO")
